@@ -7,7 +7,7 @@ import { HookReturn } from 'sequelize/types/hooks';
 export default function (app: Application): typeof Model {
   const sequelizeClient: Sequelize = app.get('sequelizeClient');
   const transactionTypes = sequelizeClient.define(
-    'transaction_types',
+    'transactionTypes',
 
     {
       id: {

@@ -1,33 +1,36 @@
+/* eslint-disable linebreak-style */
 import { Sequelize } from 'sequelize';
-import { Application } from './declarations';
+import { Application } from './declarations.d';
+import { DbSettingsType } from './Types/dbSettings';
 
-export default function (app: Application): void {
-  const connectionString = app.get('mysql');
-  const sequelize = new Sequelize(connectionString, {
-    dialect: 'mysql',
-    logging: false,
-    define: {
-      freezeTableName: true
-    }
-  });
+export default (app: Application) => {
+  const dbConfig: DbSettingsType = app.get('dbSettings');
+
+  const options = { logging: false };
+  const sequelize = dbConfig?.connectionString
+    ? new Sequelize(dbConfig.connectionString, options)
+    : new Sequelize({ ...dbConfig, ...options });
+
   const oldSetup = app.setup;
 
   app.set('sequelizeClient', sequelize);
 
-  app.setup = function (...args): Application {
+  // eslint-disable-next-line func-names
+  app.setup = function (...args) {
     const result = oldSetup.apply(this, args);
 
     // Set up data relationships
-    const models = sequelize.models;
-    Object.keys(models).forEach(name => {
+    const { models } = sequelize;
+    Object.keys(models).forEach((name) => {
       if ('associate' in models[name]) {
-        (models[name] as any).associate(models);
+        // @ts-ignore
+        models[name].associate(models);
       }
     });
 
     // Sync to the database
-    app.set('sequelizeSync', sequelize.sync());
+    app.set('sequelizeSync', sequelize.sync({ force: true }));
 
     return result;
   };
-}
+};
