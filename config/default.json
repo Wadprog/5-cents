@@ -1,6 +1,6 @@
 {
   "host": "localhost",
-  "port": 3030,
+  "port": "SERVER_PORT",
   "public": "../public/",
   "paginate": {
     "default": 10,
@@ -9,11 +9,8 @@
   "authentication": {
     "entity": "user",
     "service": "users",
-    "secret": "/ON5aPntsMnqivkEyvvGMK/4Iuo=",
-    "authStrategies": [
-      "jwt",
-      "local"
-    ],
+    "secret": "NVzN5nfegppk8s042/GFYZhIl7o=",
+    "authStrategies": ["jwt", "local"],
     "jwtOptions": {
       "header": {
         "typ": "access"
@@ -26,19 +23,15 @@
     "local": {
       "usernameField": "email",
       "passwordField": "password"
-    },
-    "oauth": {
-      "redirect": "/",
-      "google": {
-        "key": "<google oauth key>",
-        "secret": "<google oauth secret>",
-        "scope": [
-          "email",
-          "profile",
-          "openid"
-        ]
-      }
     }
   },
-  "mysql": "mysql://root:@localhost:3306/5_cents"
+  "dbSettings": {
+    "username": "MYSQLDB_USER",
+    "password": "MYSQLDB_PASSWORD",
+    "database": "MYSQLDB_DATABASE",
+    "dialect": "SEQUELIZE_DIALECT",
+    "host": "DB_HOST"
+  },
+
+  "mysql": "mysql://root:@localhost:3306/arg_automation"
 }
