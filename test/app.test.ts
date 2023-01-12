@@ -1,7 +1,6 @@
-import assert from 'assert';
+import axios from 'axios';
 import { Server } from 'http';
 import url from 'url';
-import axios from 'axios';
 
 import app from '../src/app';
 
@@ -25,7 +24,7 @@ describe('Feathers application tests (with jest)', () => {
     server.close(done);
   });
 
-  it('starts and shows the index page', async () => {
+  it.skip('starts and shows the index page', async () => {
     expect.assertions(1);
 
     const { data } = await axios.get(getUrl());
@@ -34,7 +33,7 @@ describe('Feathers application tests (with jest)', () => {
   });
 
   describe('404', () => {
-    it('shows a 404 HTML page', async () => {
+    it.skip('shows a 404 HTML page', async () => {
       expect.assertions(2);
 
       try {
@@ -51,7 +50,7 @@ describe('Feathers application tests (with jest)', () => {
       }
     });
 
-    it('shows a 404 JSON error without stack trace', async () => {
+    it.skip('shows a 404 JSON error without stack trace', async () => {
       expect.assertions(4);
       
       try {

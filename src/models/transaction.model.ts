@@ -27,6 +27,7 @@ export default function (app: Application): typeof Model {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (transaction as any).associate = function (models: any): void {
+    transaction.belongsTo(models.groups);
     transaction.belongsTo(models.paymentMethod, {});
     transaction.belongsTo(models.transactionTypes, {});
     transaction.belongsTo(models.users, { as: 'createdBy' });

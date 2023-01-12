@@ -31,7 +31,7 @@
     "database": "MYSQLDB_DATABASE",
     "dialect": "SEQUELIZE_DIALECT",
     "host": "DB_HOST"
-  },
+  }
 
-  "mysql": "mysql://root:@localhost:3306/arg_automation"
+ 
 }

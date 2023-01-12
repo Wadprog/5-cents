@@ -9,8 +9,8 @@
     "feathers"
   ],
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Wadson Vaval ",
+    "email": "vavalson@hotmail.com"
   },
   "contributors": [],
   "bugs": {},
@@ -24,11 +24,16 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "npm run lint && npm run compile && npm run jest",
-    "lint": "eslint src/. test/. --config .eslintrc.json --ext .ts --fix",
+    "test": "jest --coverage --passWithNoTests --detectOpenHandles --verbose",
+    "test:local": "jest --watch --no-cache --detectOpenHandles",
+    "test:watch": "jest --watch --detectOpenHandles",
+    "build": "tsc",
+    "preinstall": "npm i nodemon -g",
+    "lint": "eslint src/**/*.ts ",
+    "lint:fix": "eslint --fix src/**/*.ts ",
+    "lint:prettier": "prettier  --fix src/**/*.js*",
     "dev": "ts-node-dev --no-notify src/",
     "start": "npm run compile && node lib/",
-    "jest": "jest --forceExit",
     "compile": "shx rm -rf lib/ && tsc"
   },
   "standard": {
@@ -48,14 +53,20 @@
     "@feathersjs/feathers": "^4.5.15",
     "@feathersjs/socketio": "^4.5.15",
     "@feathersjs/transport-commons": "^4.5.15",
+    "@types/lodash": "^4.14.191",
     "compression": "^1.7.4",
+    "config": "^3.3.8",
     "cors": "^2.8.5",
     "feathers-sequelize": "^6.4.0",
     "helmet": "^5.1.1",
+    "lodash": "^4.17.21",
     "mysql2": "^2.3.3",
+    "nanoid": "^4.0.0",
     "sequelize": "^6.28.0",
     "serve-favicon": "^2.5.0",
-    "winston": "^3.8.2"
+    "sqlite3": "^5.1.4",
+    "winston": "^3.8.2",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.38",

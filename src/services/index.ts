@@ -6,6 +6,8 @@ import tags from './tags/tags.service';
 import paymentMethod from './payment-method/payment-method.service';
 import categories from './categories/categories.service';
 
+import groups from './groups/groups.service';
+
 // Don't remove this comment. It's needed to format import lines nicely.
 
 export default function (app: Application): void {
@@ -15,4 +17,5 @@ export default function (app: Application): void {
   app.configure(tags);
   app.configure(paymentMethod);
   app.configure(categories);
+  app.configure(groups);
 }

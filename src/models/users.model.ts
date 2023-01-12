@@ -8,7 +8,15 @@ export default function (app: Application): typeof Model {
   const sequelizeClient: Sequelize = app.get('sequelizeClient');
   const users = sequelizeClient.define(
     'users',
+
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        unique: true,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -44,6 +52,9 @@ export default function (app: Application): typeof Model {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (users as any).associate = function (models: any): void {
+    users.hasMany(models.groups, { as: 'groups' });
+    users.hasMany(models.transactions, { as: 'transactions' });
+    
     // Define associations here
     // See https://sequelize.org/master/manual/assocs.html
   };

@@ -1,8 +1,8 @@
 import app from '../../src/app';
 
-describe('\'category \' service', () => {
+describe('\'groups\' service', () => {
   it('registered the service', () => {
-    const service = app.service('category');
+    const service = app.service('groups');
     expect(service).toBeTruthy();
   });
 });

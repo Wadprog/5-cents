@@ -1,1 +1,10 @@
-{}
+{
+  "dbSettings": {
+    "username": "root",
+    "password": "some_secure_dev_password",
+    "database": "arg_db",
+    "dialect": "mysql",
+    "host": "localhost",
+    "port": "3306"
+  }
+}

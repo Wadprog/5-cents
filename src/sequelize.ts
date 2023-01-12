@@ -1,21 +1,18 @@
 /* eslint-disable linebreak-style */
+import { assign, isNil } from 'lodash';
 import { Sequelize } from 'sequelize';
 import { Application } from './declarations.d';
 import { DbSettingsType } from './Types/dbSettings';
 
 export default (app: Application) => {
   const dbConfig: DbSettingsType = app.get('dbSettings');
-  console.log('Logging the configuration');
-  console.log(dbConfig);
-
   const options = { logging: false };
-  const sequelize = dbConfig?.connectionString
-    ? new Sequelize(dbConfig.connectionString, options)
-    : new Sequelize({ ...dbConfig, ...options });
+  const { connectionString, ...dbOptions } = dbConfig;
+  const sequelize = !isNil(connectionString)
+    ? new Sequelize(connectionString, assign({}, dbOptions, options))
+    : new Sequelize({ ...dbConfig, ...assign({}, dbOptions, options) });
 
-  console.log('Connecting to the database...');
   const oldSetup = app.setup;
-
   app.set('sequelizeClient', sequelize);
 
   // eslint-disable-next-line func-names
